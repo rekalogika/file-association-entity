@@ -1,0 +1,37 @@
+{
+    "name": "rekalogika/file-association-entity",
+    "description": "Various utilities for handling files in domain entities.",
+    "homepage": "https://rekalogika.dev/file",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "file",
+        "association",
+        "upload",
+        "entity",
+        "attachment",
+        "doctrine",
+        "file upload",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Priyadi Iman Nurcahyo",
+            "email": "priyadi@rekalogika.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekalogika\\Domain\\File\\Association\\Entity\\": "src/"
+        }
+    },
+    "require": {
+        "rekalogika/file-contracts": "^1.3",
+        "rekalogika/file-metadata": "^1.3"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.3.x-dev"
+        }
+    }
+}
