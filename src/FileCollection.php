@@ -13,43 +13,43 @@ declare(strict_types=1);
 
 namespace Rekalogika\Domain\File\Association\Entity;
 
-use Doctrine\Common\Collections\ReadableCollection;
-use Rekalogika\Collections\Decorator\Trait\ReadableCollectionDecoratorTrait;
+use Doctrine\Common\Collections\Collection;
+use Rekalogika\Collections\Decorator\Trait\CollectionDecoratorTrait;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
- * Decorates a ReadableCollection<FileInterface> so that it will also be an
- * instance of DirectoryInterface. The caller will be able to easily know that
- * the collection contains files. Designed to be used inside Doctrine entities.
+ * Decorates a Collection<FileInterface> so that it will also be an instance of
+ * DirectoryInterface. The caller will be able to easily know that the
+ * collection contains files. Designed to be used inside Doctrine entities.
  *
  * @template TKey of array-key
  * @template T of FileInterface
- * @implements ReadableCollection<TKey,T>
+ * @implements Collection<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class ReadableFileCollectionDecorator implements ReadableCollection, DirectoryInterface
+final class FileCollection implements Collection, DirectoryInterface
 {
     /**
-     * @use ReadableCollectionDecoratorTrait<TKey,T>
+     * @use CollectionDecoratorTrait<TKey,T>
      */
-    use ReadableCollectionDecoratorTrait;
+    use CollectionDecoratorTrait;
 
     /**
-     * @param ReadableCollection<TKey,T> $files
+     * @param Collection<TKey,T> $files
      */
     public function __construct(
-        private ReadableCollection $files,
+        private Collection $files,
         private ?string $name = null
     ) {
     }
 
     /**
-     * @return ReadableCollection<TKey,T>
+     * @return Collection<TKey,T>
      */
-    protected function getWrapped(): ReadableCollection
+    protected function getWrapped(): Collection
     {
         return $this->files;
     }

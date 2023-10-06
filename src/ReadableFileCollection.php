@@ -13,43 +13,43 @@ declare(strict_types=1);
 
 namespace Rekalogika\Domain\File\Association\Entity;
 
-use Doctrine\Common\Collections\Collection;
-use Rekalogika\Collections\Decorator\Trait\CollectionDecoratorTrait;
+use Doctrine\Common\Collections\ReadableCollection;
+use Rekalogika\Collections\Decorator\Trait\ReadableCollectionDecoratorTrait;
 use Rekalogika\Contracts\File\FileInterface;
 use Rekalogika\Contracts\File\FileNameInterface;
 use Rekalogika\Contracts\File\DirectoryInterface;
 use Rekalogika\Domain\File\Metadata\Model\FileName;
 
 /**
- * Decorates a Collection<FileInterface> so that it will also be an instance of
- * DirectoryInterface. The caller will be able to easily know that the
- * collection contains files. Designed to be used inside Doctrine entities.
+ * Decorates a ReadableCollection<FileInterface> so that it will also be an
+ * instance of DirectoryInterface. The caller will be able to easily know that
+ * the collection contains files. Designed to be used inside Doctrine entities.
  *
  * @template TKey of array-key
  * @template T of FileInterface
- * @implements Collection<TKey,T>
+ * @implements ReadableCollection<TKey,T>
  * @implements DirectoryInterface<TKey,T>
  */
-final class FileCollectionDecorator implements Collection, DirectoryInterface
+final class ReadableFileCollection implements ReadableCollection, DirectoryInterface
 {
     /**
-     * @use CollectionDecoratorTrait<TKey,T>
+     * @use ReadableCollectionDecoratorTrait<TKey,T>
      */
-    use CollectionDecoratorTrait;
+    use ReadableCollectionDecoratorTrait;
 
     /**
-     * @param Collection<TKey,T> $files
+     * @param ReadableCollection<TKey,T> $files
      */
     public function __construct(
-        private Collection $files,
+        private ReadableCollection $files,
         private ?string $name = null
     ) {
     }
 
     /**
-     * @return Collection<TKey,T>
+     * @return ReadableCollection<TKey,T>
      */
-    protected function getWrapped(): Collection
+    protected function getWrapped(): ReadableCollection
     {
         return $this->files;
     }
